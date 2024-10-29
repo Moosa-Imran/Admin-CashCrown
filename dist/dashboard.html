@@ -99,123 +99,79 @@
             </nav>
             
             
-
             <div class="main-sidebar">
-    <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
-            <a href="/dashboard">Cash Crown</a>
-        </div>
-
-        <ul class="sidebar-menu">
-
-            <li class="nav-item dropdown active">
-                <a href="/dashboard" class="nav-link ">
-                    <i data-feather="home"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="/dashboard">Cash Crown</a>
+                    </div>
             
+                    <ul class="sidebar-menu">
             
-
-            <li class="sidebar-menu-caption">User management</li>
-
-                            <li class="nav-item dropdown ">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                        <i data-feather="user"></i>
-                        <span>Manage users                         </span></a>
-                    <ul class="dropdown-menu">
-                        <li class="">
-                            <a class="nav-link" href="/users">Manage users</a>
+                        <li class="nav-item dropdown active">
+                            <a href="/dashboard" class="nav-link">
+                                <i data-feather="home"></i>
+                                <span>Dashboard</span>
+                            </a>
                         </li>
-
-                        <li class="">
-                            <a class="nav-link"
-                                href="/user-active">Active users</a>
+            
+                        <li class="sidebar-menu-caption">User Management</li>
+            
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i data-feather="user"></i>
+                                <span>Manage users</span>
+                            </a>
                         </li>
-
-                        <li class="">
-                            <a class="nav-link"
-                                href="/user-deactive">Deactive users <span
-                                    class="badge badge-danger">0</span></a>
+            
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="/ticket">
+                                <i data-feather="user"></i>
+                                <span>Support</span>
+                            </a>
+                        </li> -->
+            
+                        <li class="sidebar-menu-caption">Payment and Payout</li>
+            
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i data-feather="database"></i>
+                                <span>Manual payments</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="/pending-payments">Pending payments</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/rejected-payments">Rejected payments</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/accepted-payments">Accepted payments</a>
+                                </li>
+                            </ul>
                         </li>
-
+            
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i data-feather="package"></i>
+                                <span>Manage withdraw</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link" href="/withdraw-pending">Pending withdraws</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/withdraw-rejected">Rejected withdraws</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/withdraw-accepted">Accepted withdraws</a>
+                                </li>
+                            </ul>
+                        </li>
+            
                     </ul>
-                </li>
+                </aside>
+            </div>
             
-
-
-
-                            <li class="nav-item dropdown ">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                        <i data-feather="inbox"></i>
-                        <span>Ticket</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="">
-                            <a class="nav-link" href="/ticket">All tickets</a>
-                        </li>
-                        <li class="">
-                            <a class="nav-link"
-                                href="/pendingList">Pending ticket</a>
-                        </li>
-                    </ul>
-                </li>
-
-            <li class="sidebar-menu-caption">Payment and payout</li>
-
-                            <li class="nav-item dropdown ">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                        <i data-feather="database"></i>
-                        <span>Manual payments</span></a>
-                    <ul class="dropdown-menu">
-
-                        <li class="">
-                            <a class="nav-link"
-                                href="/pending-payments">Pending payments</a>
-                        </li>
-
-                        <li class="">
-                            <a class="nav-link"
-                                href="/accepted-payments">Accepted payments</a>
-                        </li>
-
-                        <li class="">
-                            <a class="nav-link"
-                                href="/rejected-payments">Rejected payments</a>
-                        </li>
-
-                    </ul>
-                </li>
-            
-                            <li class="nav-item dropdown ">
-                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                        <i data-feather="package"></i>
-                        <span>Manage withdraw</span></a>
-                    <ul class="dropdown-menu">
-                        <li class="">
-                            <a class="nav-link" href="/withdraw-method">Withdraw method</a>
-                        </li>
-                        <li class="">
-                            <a class="nav-link"
-                                href="/withdraw-pending">Pending withdraws</a>
-                        </li>
-                        <li class="">
-                            <a class="nav-link"
-                                href="/withdraw-accepted">Accepted withdraws</a>
-                        </li>
-                        <li class="">
-                            <a class="nav-link"
-                                href="/withdraw-rejected">Rejected withdraws</a>
-                        </li>
-                    </ul>
-                </li>
-            
-            
-            
-
-        </ul>
-    </aside>
-</div>
                 <div class="main-content">
         <section class="section">
             
@@ -237,7 +193,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total invest</p>
-                            <h4 class="card-stat-amount">23,999,309,319.00 $</h4>
+                            <h4 class="card-stat-amount"><span id="total_invest">0</span> $</h4>
                         </div>
                     </div>
                 </div>
@@ -248,7 +204,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total pending invest</p>
-                            <h4 class="card-stat-amount">132,865,478,584,889.59 $</h4>
+                            <h4 class="card-stat-amount"><span id="pending_invest">0</span> $</h4>
                         </div>
                     </div>
                 </div>
@@ -260,7 +216,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total interest amount</p>
-                            <h4 class="card-stat-amount">29,843,765.85 $</h4>
+                            <h4 class="card-stat-amount"><span id="total_profit">0</span> $</h4>
                         </div>
                     </div>
                 </div>
@@ -272,7 +228,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total user</p>
-                            <h4 class="card-stat-amount">2777</h4>
+                            <h4 class="card-stat-amount"><span id="total_users">0</span></h4>
                         </div>
                     </div>
                 </div>
@@ -284,7 +240,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total active user</p>
-                            <h4 class="card-stat-amount">2777</h4>
+                            <h4 class="card-stat-amount"><span id="active_users">0</span></h4>
                         </div>
                     </div>
                 </div>
@@ -295,7 +251,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total deactived user</p>
-                            <h4 class="card-stat-amount">0</h4>
+                            <h4 class="card-stat-amount"><span id="deactive_users">0</span></h4>
                         </div>
                     </div>
                 </div>
@@ -306,7 +262,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total withdraw</p>
-                            <h4 class="card-stat-amount">1,200.00 $</h4>
+                            <h4 class="card-stat-amount"><span id="total_withdraw">0</span> $</h4>
                         </div>
                     </div>
                 </div>
@@ -318,93 +274,7 @@
                         </div>
                         <div class="content">
                             <p class="caption">Total pending withdraw</p>
-                            <h4 class="card-stat-amount">16,340.50 $</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon gr-bg-1 rounded-circle">
-                            <i class="fas fa-dungeon"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Autometic gateways</h4>
-                            </div>
-                            <div class="card-body">
-                                20
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon gr-bg-1 rounded-circle">
-                            <i class="fas fa-dungeon"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Withdraw charge</h4>
-                            </div>
-                            <div class="card-body">
-                                15.00 $
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon gr-bg-1 rounded-circle">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Withdraw gateways</h4>
-                            </div>
-                            <div class="card-body">
-                                1
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-xxxl-3 custom-xxl-4 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon gr-bg-1 rounded-circle">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Withdraw gateways</h4>
-                            </div>
-                            <div class="card-body">
-                                1
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row"> 
-                <div class="col-md-6 col-12 col-lg-6">
-                    <div class="card invest-report-card">
-                        <div class="card-header gr-bg-1">
-                            <h4 class="text-white">Invest report</h4>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart2"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6  col-12 col-lg-6">
-                    <div class="card invest-report-card">
-                        <div class="card-header gr-bg-1">
-                            <h4 class="text-white">Withdraw report</h4>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart3"></canvas>
+                            <h4 class="card-stat-amount"><span id="pending_withdraw">0</span> $</h4>
                         </div>
                     </div>
                 </div>
@@ -424,67 +294,81 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="asset/admin/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> 
-
-
+    
     <script>
-        'use strict'
+        $(document).ready(function () {
+    // Fetch and update all data when the page loads
+    fetchAndCalculateData();
 
-        var ctx2 = document.getElementById('myChart2').getContext('2d');
-        var myChart2 = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ["April","August","December","February","January","July","June","March","May","November","October","September"],
-                datasets: [{
-                    label: 'Total Invests',
-                    barThickness: 10,
-                    maxBarThickness: 12,
-                    data: ["51625.00000000","25968.00000000","1903.00000000","1462.00000000","1187.00000000","13355.00000000","14411.00000000","123730.00000000","15915.00000000","5474.00000000","23999039219.00000000","15070.00000000"],
-                    backgroundColor: ['#2C86DB'],
-                    borderColor: [
-                        '#2C86DB'
-                    ],
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    function fetchAndCalculateData() {
+        // Fetch data from all three routes concurrently
+        Promise.all([
+            fetch('/allusers').then(res => res.json()),
+            fetch('/investments').then(res => res.json()),
+            fetch('/withdrawals').then(res => res.json())
+        ])
+        .then(([users, investments, withdrawals]) => {
+            // Initialize counters
+            let totalUsers = 0;
+            let totalProfit = 0;
+            let activeUsers = 0;
+            let deactiveUsers = 0;
+            let totalInvest = 0;
+            let pendingInvest = 0;
+            let totalWithdraw = 0;
+            let pendingWithdraw = 0;
+
+            // Process users data
+            totalUsers = users.length;
+            users.forEach(user => {
+                totalProfit += user.profit || 0;
+                if (user.active) {
+                    activeUsers++;
+                } else {
+                    deactiveUsers++;
                 }
-            }
-        });
+            });
 
-
-
-        var ctx3 = document.getElementById('myChart3').getContext('2d');
-        var myChart3 = new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ["October"],
-                datasets: [{
-                    label: 'Total Withdraw',
-                    barThickness: 10,
-                    maxBarThickness: 12,
-                    data: ["1200.00000000"],
-                    backgroundColor: ['#2C86DB'],
-                    borderColor: [
-                        '#2C86DB'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: { 
-                scales: { 
-                    y: { 
-                        beginAtZero: true
-                    }
+            // Process investments data
+            investments.forEach(investment => {
+                if (investment.status === 'active' || investment.status === 'canceled') {
+                    totalInvest += investment.amount || 0;
+                } else if (investment.status === 'pending') {
+                    pendingInvest += investment.amount || 0;
                 }
-            }
+            });
+
+            // Process withdrawals data
+            withdrawals.forEach(withdrawal => {
+                if (withdrawal.status === 'completed') {
+                    totalWithdraw += withdrawal.amount || 0;
+                } else if (withdrawal.status === 'pending') {
+                    pendingWithdraw += withdrawal.amount || 0;
+                }
+            });
+
+            // Update HTML elements with calculated values
+            $('#total_users').text(totalUsers);
+            $('#total_profit').text(`${totalProfit}`);
+            $('#active_users').text(activeUsers);
+            $('#deactive_users').text(deactiveUsers);
+            $('#total_invest').text(`${totalInvest}`);
+            $('#pending_invest').text(`${pendingInvest}`);
+            $('#total_withdraw').text(`${totalWithdraw}`);
+            $('#pending_withdraw').text(`${pendingWithdraw}`);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            iziToast.error({
+                title: 'Error',
+                message: 'Could not fetch data',
+                position: 'topRight'
+            });
         });
+    }
+});
+
     </script>
-
-            
     
 </body>
 

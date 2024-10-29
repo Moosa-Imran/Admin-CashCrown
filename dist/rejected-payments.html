@@ -119,10 +119,10 @@
                                 <span>Manual payments</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="active">
+                                <li>
                                     <a class="nav-link" href="/pending-payments">Pending payments</a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a class="nav-link" href="/rejected-payments">Rejected payments</a>
                                 </li>
                                 <li>
@@ -152,7 +152,6 @@
                     </ul>
                 </aside>
             </div>
-            
 
             <!-- Main Content -->
             <div class="main-content">
@@ -221,23 +220,21 @@
 
 
 <!-- Reject Modal -->
-<div class="modal" id="rejectModal" tabindex="-1" role="dialog">
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Confirm Rejection</h5>
+                <h5 class="modal-title">Confirm Delete</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to reject this payment?</p>
-                <label for="rejectComment">Comment</label>
-                <textarea id="rejectComment" class="form-control" rows="2" placeholder="Enter a comment">Sorry! We can't Verify</textarea>
+                <p>Are you sure you want to Delete this payment?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmReject">Reject</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
             </div>
         </div>
     </div>
@@ -280,14 +277,14 @@
             $.ajax({
                 url: '/investments/status',
                 method: 'GET',
-                data: { status: 'pending' },
+                data: { status: 'rejected' },
                 success: function (data) {
                     const tbody = $('#paymentsTable tbody');
                     tbody.empty(); // Clear existing data
     
                     // Check if data is empty
                     if (data.length === 0) {
-                        tbody.append('<tr><td colspan="7" class="text-center">No pending payments found.</td></tr>');
+                        tbody.append('<tr><td colspan="7" class="text-center">No rejected payments found.</td></tr>');
                         return;
                     }
     
@@ -300,11 +297,10 @@
                                 <td>$${item.amount}</td>
                                 <td>${item.TID}</td>
                                 <td>${new Date(item.timestamp).toLocaleDateString()}</td>
-                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td><span class="badge badge-danger">Rejected</span></td>
                                 <td>
                                     <button class="btn btn-md btn-info details" invest-id="${item._id}">Details</button>
                                     <button class="btn text-white btn-md btn-primary accept" invest-id="${item._id}">Accept</button>
-                                    <button class="btn text-white btn-md btn-danger reject" invest-id="${item._id}">Reject</button>
                                 </td>
                             </tr>
                         `);
@@ -314,7 +310,7 @@
                     console.error(error);
                     iziToast.error({
                         title: 'Error',
-                        message: 'Could not fetch pending payments!',
+                        message: 'Could not fetch rejected payments!',
                         position: 'topRight'
                     });
                 }
@@ -327,9 +323,9 @@
             });
     
             // Handle Reject button click
-            $(document).on('click', '.reject', function () {
+            $(document).on('click', '.delete', function () {
                 const investId = $(this).attr('invest-id'); // Get investment ID
-                $('#rejectModal').data('invest-id', investId).modal('show'); // Store ID in modal data
+                $('#deleteModal').data('invest-id', investId).modal('show'); // Store ID in modal data
             });
     
             // Handle Details button click
@@ -356,7 +352,7 @@
                                 <p><strong>Plan:</strong> ${item.plan.charAt(0).toUpperCase() + item.plan.slice(1)}</p>
                                 <p><strong>Amount:</strong> $${item.amount}</p>
                                 <p><strong>Date:</strong> ${new Date(item.timestamp).toLocaleDateString()}</p>
-                                <p><strong>Status:</strong> <span class="badge badge-warning">Pending</span></p>
+                                <p><strong>Status:</strong> <span class="badge badge-danger">Rejected</span></p>
                                 <p><strong>Screenshot:</strong></p>
                                 <img src="${imgPath}" alt="Screenshot" class="img-fluid" style="max-height: 300px; object-fit: cover;">
                                 <div class="mt-2">
@@ -420,28 +416,19 @@
             });
     
             // Handle Confirm Reject button click
-            $('#confirmReject').on('click', function () {
-                const investId = $('#rejectModal').data('invest-id'); // Retrieve investment ID
-                const comment = $('#commentReject').val() || "Sorry! We can't Verify"; // Get comment value
-                
-                if (comment.trim() === "") {
-                    iziToast.error({
-                        title: 'Error',
-                        message: 'Comment cannot be empty!',
-                        position: 'topRight'
-                    });
-                    return;
-                }
+            $('#confirmDelete').on('click', function () {
+                const investId = $('#deleteModal').data('invest-id'); // Retrieve investment ID
+                const comment ="Deleted"; 
     
                 // Call the investment control route
                 $.ajax({
-                    url: `/investmentControl/${investId}?status=rejected&comment=${encodeURIComponent(comment)}`,
+                    url: `/investmentControl/${investId}?status=delete&comment=${encodeURIComponent(comment)}`,
                     method: 'PUT',
                     success: function (response) {
-                        $('#rejectModal').modal('hide'); // Hide the reject modal
+                        $('#deleteModal').modal('hide'); // Hide the reject modal
                         iziToast.success({
-                            title: 'Rejected',
-                            message: 'Payment rejected successfully!',
+                            title: 'Deleted',
+                            message: 'Payment deleted successfully!',
                             position: 'topRight'
                         });
                         // Optionally, refresh the payments table or remove the row
@@ -451,7 +438,7 @@
                         console.error(error);
                         iziToast.error({
                             title: 'Error',
-                            message: 'Could not reject the payment!',
+                            message: 'Could not delete the payment!',
                             position: 'topRight'
                         });
                     }

@@ -60,7 +60,7 @@
                                                 id="remember-me">
                                             <label class="custom-control-label text-dark" for="remember-me">Remember me</label>
                                         </div>
-                                        <a href="/" class="text-small">Forgot password?</a>
+                                        <a onclick="forgot()" class="text-small">Forgot password?</a>
                                     </div>
                                     <button type="submit" class="login-button w-100" tabindex="4">Login</button>
                                 </form>
@@ -82,6 +82,19 @@
 
     <!-- JavaScript for handling login -->
     <script>
+                // Fetch user information and redirect if authenticated
+fetch('/fetchUser')
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === true) {
+            window.location.href = '/dashboard';
+        } else {
+            console.log("User is not authenticated");
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching user data:', error);
+    });
         document.getElementById('login-form').addEventListener('submit', async function (e) {
             e.preventDefault();
     
@@ -106,6 +119,13 @@
                 iziToast.error({ title: 'Error', message: 'Network error!' });
             }
         });
+        function forgot() {
+            iziToast.error({
+                            title: 'Impossible',
+                            message: 'Admin Can\'t Forgot his Password!',
+                            position: 'topRight'
+                        });
+        }
     </script>
     
 </body>
