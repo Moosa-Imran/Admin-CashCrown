@@ -276,7 +276,7 @@
                     url: `/investments/${investId}`,
                     method: 'GET',
                     success: function (item) {
-                        let imgPath = item.screenshot.replace("public\\", "");
+                        let imgPath = `https://cashcrown.org${item.screenshot.slice(7)}`;
                         // Prepare the modal content
                         const modalContent = `
                             <div class="modal-header">

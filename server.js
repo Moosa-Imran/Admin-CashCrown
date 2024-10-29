@@ -10,6 +10,8 @@ require('dotenv').config();
 const mongoUri = process.env.MONGO_URI;
 const app = express();
 
+app.enable('trust proxy');
+
 // Session configuration
 app.use(session({
   secret: process.env.SESSION_SECRET,
