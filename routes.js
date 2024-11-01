@@ -42,7 +42,7 @@ router.get('/fetchUser', async (req, res) => {
 });
 
 // Route for Fetching Users
-router.get('/allusers', async (req, res) => {
+router.get('/allusers', isAuthenticated, async (req, res) => {
     try {
         // Connect to the Customers collection in userDb
         const userDb = req.app.locals.usersDb;
@@ -60,7 +60,7 @@ router.get('/allusers', async (req, res) => {
 });
 
 // Route for Fetching Investments
-router.get('/investments', async (req, res) => {
+router.get('/investments', isAuthenticated, async (req, res) => {
     try {
         // Connect to the Investments collection in transactionsDb
         const transactionsDb = req.app.locals.transactionsDb;
@@ -78,7 +78,7 @@ router.get('/investments', async (req, res) => {
 });
 
 // Route for Fetching Withdrawals
-router.get('/withdrawals', async (req, res) => {
+router.get('/withdrawals', isAuthenticated, async (req, res) => {
     try {
         // Connect to the Withdrawals collection in transactionsDb
         const transactionsDb = req.app.locals.transactionsDb;
@@ -128,7 +128,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Route to get investments by status
-router.get('/investments/status', async (req, res) => {
+router.get('/investments/status', isAuthenticated, async (req, res) => {
     const { status } = req.query;
 
     if (!status) {
@@ -148,7 +148,7 @@ router.get('/investments/status', async (req, res) => {
 
 
 // Route to get investment by ID
-router.get('/investments/:investId', async (req, res) => {
+router.get('/investments/:investId', isAuthenticated, async (req, res) => {
     const { investId } = req.params; // Get investId from URL parameters
 
     try {
@@ -177,8 +177,17 @@ const plans = {
     elite: 325 
 };
 
+// Dictionary of referrals and their respective amounts
+const ref = {
+    silver: 10,
+    gold: 20,
+    platinum: 35,
+    diamond: 60,
+    elite: 100 
+};
+
 // Update investment status route
-router.put('/investmentControl/:investId', async (req, res) => {
+router.put('/investmentControl/:investId', isAuthenticated, async (req, res) => {
     const investId = req.params.investId; // Extracting investment ID from route parameters
     const { status, comment } = req.query; // Extracting status and comment from query parameters
 
@@ -225,6 +234,7 @@ router.put('/investmentControl/:investId', async (req, res) => {
         if (user) {
             // Calculate the ppd increment based on the plan
             const ppdIncrement = plans[plan] || 0; // Default to 0 if plan is not found in the dictionary
+            const refIncrement = ref[plan] || 0; 
     
             // Check if the referral code exists and is valid
             if (user.ref.code && user.ref.code.trim() !== '' && !user.ref.paid) {
@@ -240,7 +250,7 @@ router.put('/investmentControl/:investId', async (req, res) => {
                         { username: refCode },
                         {
                             $inc: {
-                                'ref.bonus': 20, // Increase the bonus by 20
+                                'ref.bonus': refIncrement, // Increase the bonus by 20
                                 'ref.total': 1    // Increase the total count by 1
                             }
                         }
@@ -289,7 +299,7 @@ router.put('/investmentControl/:investId', async (req, res) => {
 });
 
 // Route to get withdraw by status
-router.get('/withdraws/status', async (req, res) => {
+router.get('/withdraws/status', isAuthenticated, async (req, res) => {
     const { status } = req.query;
 
     if (!status) {
@@ -308,7 +318,7 @@ router.get('/withdraws/status', async (req, res) => {
 });
 
 // Route to get withdraw by ID
-router.get('/withdraws/:withdrawId', async (req, res) => {
+router.get('/withdraws/:withdrawId', isAuthenticated, async (req, res) => {
     const { withdrawId } = req.params; // Get withdrawId from URL parameters
 
     try {
@@ -329,7 +339,7 @@ router.get('/withdraws/:withdrawId', async (req, res) => {
 });
 
 // Update withdraw status route
-router.put('/withdrawControl/:withdrawId', async (req, res) => {
+router.put('/withdrawControl/:withdrawId', isAuthenticated, async (req, res) => {
     const withdrawId = req.params.withdrawId; // Extracting withdraw ID from route parameters
     const { status, comment } = req.query; // Extracting status and comment from query parameters
 
